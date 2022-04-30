@@ -32,6 +32,9 @@ before.innerHTML = JSON.stringify(companiesData, null, 2);
 // const manipulatedData = companiesData.find(function(e) {
 //   return e.fieldData.State === "TX";
 // });
+//TODO: Find units sold>300
+// const manipulatedData = salesData.filter(function(sale){
+//   return sale.fieldData.UnitsSold >= 300})
 //TODO: Create a new array with just elements of a certain state.
 //TODO: Create buttons for each record.
 //functions are here
@@ -39,9 +42,9 @@ before.innerHTML = JSON.stringify(companiesData, null, 2);
 //   return e.fieldData.State === "TX";
 // });
 
-// const filterForState = function (record) {
-//   return record.fieldData.State === "TX";
-// };
+const filterForState = function (record) {
+  return record.fieldData.State === "CA";
+};
 
 // const ConstructNewArray = function (e) {
 //   const obj = {
@@ -60,8 +63,17 @@ before.innerHTML = JSON.stringify(companiesData, null, 2);
 
 //   // return e.fieldData.CompanyName
 // };
-const manipulatedData = salesData.filter(function(sale){
-  return sale.fieldData.UnitsSold >= 300})
 const after = document.getElementById("after");
-after.innerHTML = JSON.stringify(manipulatedData, null, 2);
-before.innerHTML = JSON.stringify(salesData, null, 2); //reload before
+
+
+companiesData.filter(filterForState).forEach (function(e){
+const button = document.createElement("button");
+button.type = "button";
+button.id = "one";
+button.innerHTML = e.fieldData.CompanyName;
+button.className = "col-11    m-2 btn btn-secondary";
+
+after.appendChild(button);})
+const manipulatedData = []
+// after.innerHTML = JSON.stringify(manipulatedData, null, 2);
+before.innerHTML = JSON.stringify(companiesData, null, 2); //reload before
